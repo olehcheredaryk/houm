@@ -2,19 +2,19 @@
 
 namespace ConsoleApp2
 {
-    internal class SmartHumidifier : IObserver
+    public class SmartHumidifier : IObserver
     {
-        public string Name { get; } = "Зволожувач повітря";
-
         public void Update(double temperature, double humidity)
         {
-            if (humidity < 40.0)
+            if (humidity < 40)
             {
-                Console.WriteLine($"  -> {Name}: Низька вологість ({humidity}%). Починаю зволоження кімнати.");
+                Console.WriteLine(
+                    $"Зволожувач: вологість {humidity}%. Вмикаю зволоження.");
             }
             else
             {
-                Console.WriteLine($"  -> {Name}: Вологість в нормі ({humidity}%). Вимикаюся.");
+                Console.WriteLine(
+                    $"Зволожувач: вологість {humidity}%. Зволоження не потрібне.");
             }
         }
     }

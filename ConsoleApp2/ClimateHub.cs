@@ -3,44 +3,50 @@ using System.Collections.Generic;
 
 namespace ConsoleApp2
 {
-    internal class ClimateHub : ISubject
+    public class ClimateHub : ISubject
     {
-        private readonly List<IObserver> _observers = new List<IObserver>();
-        private double _temperature;
-        private double _humidity;
+        private readonly List<IObserver> observers = new List<IObserver>();
+
+        private double temperature;
+        private double humidity;
+
+        public double Temperature => temperature;
+        public double Humidity => humidity;
 
         public void RegisterObserver(IObserver observer)
         {
-            if (!_observers.Contains(observer))
+            if (!observers.Contains(observer))
             {
-                _observers.Add(observer);
-                Console.WriteLine($"[ХАБ]: Пристрій '{observer.Name}' успішно підключено.");
+                observers.Add(observer);
+                Console.WriteLine("Пристрій підключено до хабу.");
             }
         }
 
         public void RemoveObserver(IObserver observer)
         {
-            if (_observers.Contains(observer))
+            if (observers.Contains(observer))
             {
-                _observers.Remove(observer);
-                Console.WriteLine($"[ХАБ]: Пристрій '{observer.Name}' відключено.");
+                observers.Remove(observer);
+                Console.WriteLine("Пристрій відключено від хабу.");
             }
         }
 
         public void NotifyObservers()
         {
-            foreach (var observer in _observers)
+            foreach (IObserver observer in observers)
             {
-                observer.Update(_temperature, _humidity);
+                observer.Update(temperature, humidity);
             }
         }
 
-        // Метод для зміни показників
         public void SetClimateData(double temperature, double humidity)
         {
-            Console.WriteLine($"\n[ХАБ]: Зміна показників -> Температура: {temperature}°C, Вологість: {humidity}%");
-            _temperature = temperature;
-            _humidity = humidity;
+            this.temperature = temperature;
+            this.humidity = humidity;
+
+            Console.WriteLine(
+                $"\nХаб: температура = {temperature}°C, вологість = {humidity}%");
+
             NotifyObservers();
         }
     }

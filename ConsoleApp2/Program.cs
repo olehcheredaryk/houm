@@ -6,27 +6,29 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            // Налаштування для коректного відображення українських літер в консолі
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            // 1. Створюємо центральний хаб
+            // Створюємо центральний хаб
             ClimateHub hub = new ClimateHub();
 
-            // 2. Створюємо смарт-пристрої
+            // Створюємо смарт-пристрої
             IObserver airConditioner = new SmartAirConditioner();
             IObserver humidifier = new SmartHumidifier();
 
-            // 3. Підключаємо пристрої до хабу
+            // Підключаємо пристрої до хабу
             hub.RegisterObserver(airConditioner);
             hub.RegisterObserver(humidifier);
 
-            // 4. Зміна погоди (спекотно і сухо) -> Обидва пристрої мають зреагувати
+            // Змінюємо показники клімату
+            Console.WriteLine("\n--- Перша зміна клімату ---");
             hub.SetClimateData(28.5, 35.0);
 
-            // 5. Динамічно відключаємо кондиціонер
+            // Відключаємо кондиціонер
+            Console.WriteLine("\n--- Відключення кондиціонера ---");
             hub.RemoveObserver(airConditioner);
 
-            // 6. Зміна погоди (холодно і волого) -> Зреагує тільки зволожувач
+            // Знову змінюємо показники
+            Console.WriteLine("\n--- Друга зміна клімату ---");
             hub.SetClimateData(16.0, 60.0);
 
             Console.WriteLine("\nНатисніть будь-яку клавішу для виходу...");

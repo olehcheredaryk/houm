@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace ConsoleApp2
+﻿namespace ConsoleApp2
 {
-    internal interface IObserver
+    public interface IObserver
     {
-        string Name { get; }
         void Update(double temperature, double humidity);
     }
 }

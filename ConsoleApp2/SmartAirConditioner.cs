@@ -2,23 +2,19 @@
 
 namespace ConsoleApp2
 {
-    internal class SmartAirConditioner : IObserver
+    public class SmartAirConditioner : IObserver
     {
-        public string Name { get; } = "Кондиціонер";
-
         public void Update(double temperature, double humidity)
         {
-            if (temperature > 25.0)
+            if (temperature > 25)
             {
-                Console.WriteLine($"  -> {Name}: Температура {temperature}°C занадто висока! Вмикаю охолодження.");
-            }
-            else if (temperature < 18.0)
-            {
-                Console.WriteLine($"  -> {Name}: Температура {temperature}°C занадто низька! Вмикаю обігрів.");
+                Console.WriteLine(
+                    $"Кондиціонер: температура {temperature}°C. Вмикаю охолодження.");
             }
             else
             {
-                Console.WriteLine($"  -> {Name}: Температура в нормі ({temperature}°C). Режим очікування.");
+                Console.WriteLine(
+                    $"Кондиціонер: температура {temperature}°C. Охолодження не потрібне.");
             }
         }
     }
